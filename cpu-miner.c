@@ -113,6 +113,7 @@ enum algos {
     ALGO_X13,         /* X13 */
     ALGO_X14,         /* X14 */
     ALGO_X15,         /* X15 Whirlpool */
+    ALGO_SOPHIA,     /* sophia */
     ALGO_CRYPTONIGHT, /* CryptoNight */
 };
 
@@ -130,6 +131,7 @@ static const char *algo_names[] = {
     [ALGO_X13] =         "x13",
     [ALGO_X14] =         "x14",
     [ALGO_X15] =         "x15",
+    [ALGO_SOPHIA] =      "sophia",
     [ALGO_CRYPTONIGHT] = "cryptonight",
 };
 
@@ -1214,6 +1216,10 @@ static void *miner_thread(void *userdata) {
             rc = scanhash_x15(thr_id, work.data, work.target, max_nonce,
                     &hashes_done);
             break;
+        case ALGO_SOPHIA:
+            rc = scanhash_sophia(thr_id, work.data, work.target, max_nonce,
+                    &hashes_done);
+            break;
         case ALGO_CRYPTONIGHT:
             rc = scanhash_cryptonight(thr_id, work.data, work.target,
                     max_nonce, &hashes_done);
@@ -1229,7 +1235,7 @@ static void *miner_thread(void *userdata) {
         timeval_subtract(&diff, &tv_end, &tv_start);
         if (diff.tv_usec || diff.tv_sec) {
             pthread_mutex_lock(&stats_lock);
-            thr_hashrates[thr_id] = 
+            thr_hashrates[thr_id] =
                 hashes_done / (diff.tv_sec + diff.tv_usec * 1e-6);
             pthread_mutex_unlock(&stats_lock);
         }

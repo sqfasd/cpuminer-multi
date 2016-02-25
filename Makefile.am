@@ -57,7 +57,11 @@ minerd_SOURCES	= elist.h \
 		  crypto/c_jh.c \
 		  crypto/c_skein.c \
 		  crypto/hash.c \
-		  crypto/aesb.c
+		  crypto/aesb.c \
+		  sph_sophia.h \
+		  sph_types.h \
+		  sophia.c \
+		  sophia_hash.c
 if USE_ASM
 if ARCH_x86
 minerd_SOURCES += sha2-x86.S scrypt-x86.S aesb-x86.S crypto/aesb-x86-impl.c
