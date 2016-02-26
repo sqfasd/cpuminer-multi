@@ -1030,6 +1030,8 @@ static void stratum_gen_work(struct stratum_ctx *sctx, struct work *work) {
 
         if (opt_algo == ALGO_SCRYPT)
             diff_to_target(work->target, sctx->job.diff / 65536.0);
+        else if (opt_algo == ALGO_SOPHIA)
+            diff_to_target(work->target, sctx->job.diff / 256.0);
         else
             diff_to_target(work->target, sctx->job.diff);
     }
