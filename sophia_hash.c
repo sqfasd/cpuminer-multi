@@ -106,8 +106,7 @@ int scanhash_sophia_(int thr_id, uint32_t *pdata, const uint32_t *ptarget,
     pdata[19] = ++n;
     be32enc(&endiandata[19], n);
     sophia_hash(&endiandata, 80, hash64);
-    if (
-        fulltest(hash64, ptarget)) {
+    if (((hash64[7]&0xFFFFFF00)==0) && fulltest(hash64, ptarget)) {
       *hashes_done = n - first_nonce + 1;
       return true;
     }
