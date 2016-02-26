@@ -77,4 +77,4 @@ endif
 minerd_LDFLAGS	= $(PTHREAD_FLAGS)
 minerd_LDADD	= @LIBCURL@ @JANSSON_LIBS@ @PTHREAD_LIBS@ @WS2_LIBS@
 minerd_CPPFLAGS = @LIBCURL_CPPFLAGS@
-minerd_CFLAGS   = -Ofast -flto -fuse-linker-plugin
+minerd_CFLAGS   = -O2#-Ofast -flto -fuse-linker-plugin
